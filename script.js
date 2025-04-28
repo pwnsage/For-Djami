@@ -1,4 +1,4 @@
-﻿const endDate = new Date('2025-06-07');
+﻿const endDate = new Date('2025-06-07');  // Установим дату конца отсчета
 
 const surprises = [
     "Сегодня идеальный день для мечты о новом путешествии!",
@@ -20,10 +20,29 @@ const surprises = [
     "Запиши 3 хорошие мысли о дне.",
     "Впереди встреча с любимыми людьми.",
     "Позволь себе помечтать по-крупному.",
-    "Скоро новое начало — и оно будет прекрасным!"
+    "Скоро новое начало — и оно будет прекрасным!",
+    "Каждый день — шаг к новой жизни.",
+    "Скоро путешествие, впереди только радость!",
+    "Помни, что каждый момент ценен.",
+    "Ты ближе к цели, чем думаешь.",
+    "Сегодня день, чтобы побаловать себя.",
+    "Завтра начнется новое путешествие.",
+    "Никогда не забывай, что ты — сила!",
+    "Ты заслуживаешь всего лучшего!",
+    "Вдохновляйся каждым моментом.",
+    "Сегодня — день для новых планов.",
+    "Твоя мечта скоро станет реальностью.",
+    "Погружайся в мир приключений с радостью.",
+    "Открой глаза — вокруг столько красоты!",
+    "Каждый день — это шанс быть счастливым.",
+    "Никогда не останавливайся на полпути.",
+    "Сегодня идеальный день для свершений.",
+    "Скоро ты будешь там, где всегда хотел(а) быть.",
+    "Ты — главный герой своей истории.",
+    "Забудь обыденность, открой новое!"
 ];
 
-// Функция для подсчета времени до конца отсчета
+// Обновление времени до конца отсчета
 function updateCountdown() {
     const now = new Date();
     const diffTime = endDate - now;
@@ -31,6 +50,7 @@ function updateCountdown() {
     document.getElementById('countdown').textContent = `${daysLeft} дней`;
 }
 
+// Показ сюрприза
 function showSurprise() {
     const today = new Date();
     const daySeed = today.getDate() + today.getMonth() + today.getFullYear();
@@ -43,16 +63,6 @@ function showSurprise() {
     document.querySelector('button').style.display = 'none';
 }
 
-// Устанавливаем градиентный фон
-function updateBackground() {
-    const today = new Date();
-    const daySeed = today.getDate() + today.getMonth() + today.getFullYear();
-    // Градиент будет меняться в зависимости от дня
-    const gradient = `linear-gradient(135deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)`;
-    document.body.style.background = gradient;
-}
-
 // Инициализация
 updateCountdown();
-updateBackground();
-setInterval(updateCountdown, 60000);
+setInterval(updateCountdown, 60000);  // Обновляем отсчёт каждую минуту

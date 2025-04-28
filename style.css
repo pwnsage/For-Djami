@@ -1,0 +1,70 @@
+/* Общие стили */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-x: hidden;
+  transition: background 1s ease-in-out;
+}
+
+/* Заголовок */
+h1 {
+  font-size: 6vw;
+  margin-bottom: 5vh;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Отсчёт дней */
+#countdown {
+  font-size: 10vw;
+  margin-bottom: 5vh;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Сюрприз */
+#surprise {
+  font-size: 5vw;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4vw;
+  margin: 2vw;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#surprise.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Кнопка */
+button {
+  margin-top: 4vh;
+  padding: 2vh 4vh;
+  font-size: 5vw;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  background: #2980b9;
+}
