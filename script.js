@@ -1,4 +1,4 @@
-const endDate = new Date('2025-06-07');
+﻿const endDate = new Date('2025-06-07');
 
 const surprises = [
     "Сегодня идеальный день для мечты о новом путешествии!",
@@ -31,7 +31,8 @@ const backgrounds = [
     "url('https://source.unsplash.com/1080x1920/?mountains,sky')",
     "url('https://source.unsplash.com/1080x1920/?ocean')",
     "url('https://source.unsplash.com/1080x1920/?forest')",
-    "url('https://source.unsplash.com/1080x1920/?sunset')"
+    "url('https://source.unsplash.com/1080x1920/?sunset')",
+    "url('https://via.placeholder.com/1080x1920/87ceeb/ffffff?text=No+Image+Available')"  // Fallback image
 ];
 
 function updateCountdown() {
@@ -59,6 +60,7 @@ function updateBackground() {
     const daySeed = today.getDate() + today.getMonth() + today.getFullYear();
     const bg = backgrounds[daySeed % backgrounds.length];
     document.body.style.backgroundImage = bg;
+    document.body.style.backgroundColor = '#87ceeb';  // Цвет фона по умолчанию
 }
 
 // Инициализация
