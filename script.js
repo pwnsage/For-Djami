@@ -23,18 +23,7 @@ const surprises = [
     "Скоро новое начало — и оно будет прекрасным!"
 ];
 
-// Картинки фона
-const backgrounds = [
-    "url('https://source.unsplash.com/1080x1920/?beach,travel')",
-    "url('https://source.unsplash.com/1080x1920/?desert')",
-    "url('https://source.unsplash.com/1080x1920/?city,night')",
-    "url('https://source.unsplash.com/1080x1920/?mountains,sky')",
-    "url('https://source.unsplash.com/1080x1920/?ocean')",
-    "url('https://source.unsplash.com/1080x1920/?forest')",
-    "url('https://source.unsplash.com/1080x1920/?sunset')",
-    "url('https://via.placeholder.com/1080x1920/87ceeb/ffffff?text=No+Image+Available')"  // Fallback image
-];
-
+// Функция для подсчета времени до конца отсчета
 function updateCountdown() {
     const now = new Date();
     const diffTime = endDate - now;
@@ -54,13 +43,13 @@ function showSurprise() {
     document.querySelector('button').style.display = 'none';
 }
 
-// Устанавливаем фон в зависимости от дня
+// Устанавливаем градиентный фон
 function updateBackground() {
     const today = new Date();
     const daySeed = today.getDate() + today.getMonth() + today.getFullYear();
-    const bg = backgrounds[daySeed % backgrounds.length];
-    document.body.style.backgroundImage = bg;
-    document.body.style.backgroundColor = '#87ceeb';  // Цвет фона по умолчанию
+    // Градиент будет меняться в зависимости от дня
+    const gradient = `linear-gradient(135deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)`;
+    document.body.style.background = gradient;
 }
 
 // Инициализация
