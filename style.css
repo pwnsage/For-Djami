@@ -36,11 +36,15 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   line-height: 1.5;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
 }
 
 #surprise.show {
   opacity: 1;
+  height: auto;
+  min-height: 60px;
 }
 
 #surpriseBtn {
@@ -52,14 +56,14 @@ h1 {
   border-radius: 30px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, background 0.2s;
-  opacity: 1;
-  transition: opacity 0.5s ease;
+  transition: all 0.3s ease;
+  margin-top: 20px;
 }
 
 #surpriseBtn.hidden {
   opacity: 0;
   pointer-events: none;
+  transform: translateY(20px);
 }
 
 #surpriseBtn:hover {
