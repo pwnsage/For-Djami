@@ -35,16 +35,17 @@ h1 {
   backdrop-filter: blur(5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   line-height: 1.5;
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
-  transition: all 0.5s ease;
+  display: none; /* Изначально скрыт */
 }
 
 #surprise.show {
-  opacity: 1;
-  height: auto;
-  min-height: 60px;
+  display: block; /* Показываем при добавлении класса */
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 #surpriseBtn {
@@ -57,13 +58,6 @@ h1 {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  margin-top: 20px;
-}
-
-#surpriseBtn.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px);
 }
 
 #surpriseBtn:hover {
