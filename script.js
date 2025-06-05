@@ -53,9 +53,9 @@ const surprises = [
   "Ты летишь не один(а) - с тобой все, кто ждёт тебя"
 ];
 
-let lastSurpriseTime = 0;
-const surpriseBtn = document.getElementById('surpriseBtn');
 const surpriseElement = document.getElementById('surprise');
+const surpriseBtn = document.getElementById('surpriseBtn');
+let lastClickTime = 0;
 
 function updateCountdown() {
   const now = new Date();
@@ -63,8 +63,7 @@ function updateCountdown() {
   
   if (diffTime <= 0) {
     document.getElementById('countdown').textContent = "Время пришло!";
-    surpriseElement.textContent = "Добро пожаловать домой!";
-    surpriseElement.classList.add('show');
+    showMessage("Добро пожаловать домой!");
     return;
   }
   
@@ -77,34 +76,46 @@ function updateCountdown() {
     `${days}д ${hours}ч ${minutes}м ${seconds}с`;
 }
 
-function showSurpriseByHour() {
+function showMessage(message) {
+  surpriseElement.textContent = message;
+  surpriseElement.classList.add('show');
+}
+
+function showHourlySurprise() {
   const now = new Date();
   const hourIndex = now.getHours() % surprises.length;
-  surpriseElement.textContent = surprises[hourIndex];
-  surpriseElement.classList.add('show');
+  showMessage(surprises[hourIndex]);
   
-  // Показываем кнопку если прошёл час с последнего нажатия
-  if (now.getTime() - lastSurpriseTime > 60 * 60 * 1000) {
-    surpriseBtn.classList.remove('hidden');
-  }
+  // Проверяем, можно ли показать кнопку
+  checkButtonVisibility();
 }
 
 function showRandomSurprise() {
   const randomIndex = Math.floor(Math.random() * surprises.length);
-  surpriseElement.textContent = surprises[randomIndex];
-  surpriseElement.classList.add('show');
+  showMessage(surprises[randomIndex]);
   surpriseBtn.classList.add('hidden');
-  lastSurpriseTime = new Date().getTime();
+  lastClickTime = Date.now();
   
-  // Через час снова покажем кнопку
+  // Кнопка появится снова через час
   setTimeout(() => {
     surpriseBtn.classList.remove('hidden');
   }, 60 * 60 * 1000);
 }
 
+function checkButtonVisibility() {
+  const now = Date.now();
+  if (now - lastClickTime > 60 * 60 * 1000) {
+    surpriseBtn.classList.remove('hidden');
+  }
+}
+
 // Инициализация
 surpriseBtn.addEventListener('click', showRandomSurprise);
 updateCountdown();
-showSurpriseByHour();
 setInterval(updateCountdown, 1000);
-setInterval(showSurpriseByHour, 60 * 60 * 1000);
+
+// Показываем первый сюрприз при загрузке
+setTimeout(() => {
+  showHourlySurprise();
+  setInterval(showHourlySurprise, 60 * 60 * 1000);
+}, 1000);
