@@ -53,6 +53,13 @@ h1 {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, background 0.2s;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+#surpriseBtn.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 #surpriseBtn:hover {
