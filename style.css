@@ -31,7 +31,35 @@ h1 {
   padding: 15px 25px;
   border-radius: 10px;
   max-width: 80%;
-  margin-top: 20px;
+  margin: 20px 0;
   backdrop-filter: blur(5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#surprise.show {
+  opacity: 1;
+}
+
+#surpriseBtn {
+  padding: 12px 24px;
+  font-size: 18px;
+  background: #ffffff;
+  color: #22c1c3;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background 0.2s;
+}
+
+#surpriseBtn:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+#surpriseBtn:active {
+  transform: translateY(1px);
 }
