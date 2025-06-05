@@ -60,6 +60,7 @@ function updateCountdown() {
   if (diffTime <= 0) {
     document.getElementById('countdown').textContent = "Время пришло!";
     document.getElementById('surprise').textContent = "Добро пожаловать домой!";
+    document.getElementById('surprise').classList.add('show');
     return;
   }
   
@@ -72,14 +73,14 @@ function updateCountdown() {
     `${days}д ${hours}ч ${minutes}м ${seconds}с`;
 }
 
-function showSurprise() {
-  const now = new Date();
-  const hourIndex = now.getHours() % surprises.length;
-  document.getElementById('surprise').textContent = surprises[hourIndex];
+function showRandomSurprise() {
+  const surpriseElement = document.getElementById('surprise');
+  const randomIndex = Math.floor(Math.random() * surprises.length);
+  surpriseElement.textContent = surprises[randomIndex];
+  surpriseElement.classList.add('show');
 }
 
 // Инициализация
+document.getElementById('surpriseBtn').addEventListener('click', showRandomSurprise);
 updateCountdown();
-showSurprise();
 setInterval(updateCountdown, 1000);
-setInterval(showSurprise, 60 * 60 * 1000);
