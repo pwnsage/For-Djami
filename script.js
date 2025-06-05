@@ -53,14 +53,18 @@ const surprises = [
   "Ты летишь не один(а) - с тобой все, кто ждёт тебя"
 ];
 
+let lastSurpriseTime = 0;
+const surpriseBtn = document.getElementById('surpriseBtn');
+const surpriseElement = document.getElementById('surprise');
+
 function updateCountdown() {
   const now = new Date();
   const diffTime = endDate - now;
   
   if (diffTime <= 0) {
     document.getElementById('countdown').textContent = "Время пришло!";
-    document.getElementById('surprise').textContent = "Добро пожаловать домой!";
-    document.getElementById('surprise').classList.add('show');
+    surpriseElement.textContent = "Добро пожаловать домой!";
+    surpriseElement.classList.add('show');
     return;
   }
   
@@ -73,14 +77,34 @@ function updateCountdown() {
     `${days}д ${hours}ч ${minutes}м ${seconds}с`;
 }
 
+function showSurpriseByHour() {
+  const now = new Date();
+  const hourIndex = now.getHours() % surprises.length;
+  surpriseElement.textContent = surprises[hourIndex];
+  surpriseElement.classList.add('show');
+  
+  // Показываем кнопку если прошёл час с последнего нажатия
+  if (now.getTime() - lastSurpriseTime > 60 * 60 * 1000) {
+    surpriseBtn.classList.remove('hidden');
+  }
+}
+
 function showRandomSurprise() {
-  const surpriseElement = document.getElementById('surprise');
   const randomIndex = Math.floor(Math.random() * surprises.length);
   surpriseElement.textContent = surprises[randomIndex];
   surpriseElement.classList.add('show');
+  surpriseBtn.classList.add('hidden');
+  lastSurpriseTime = new Date().getTime();
+  
+  // Через час снова покажем кнопку
+  setTimeout(() => {
+    surpriseBtn.classList.remove('hidden');
+  }, 60 * 60 * 1000);
 }
 
 // Инициализация
-document.getElementById('surpriseBtn').addEventListener('click', showRandomSurprise);
+surpriseBtn.addEventListener('click', showRandomSurprise);
 updateCountdown();
+showSurpriseByHour();
 setInterval(updateCountdown, 1000);
+setInterval(showSurpriseByHour, 60 * 60 * 1000);
