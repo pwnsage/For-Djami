@@ -53,17 +53,12 @@ const surprises = [
   "Ты летишь не один(а) - с тобой все, кто ждёт тебя"
 ];
 
-const surpriseElement = document.getElementById('surprise');
-const surpriseBtn = document.getElementById('surpriseBtn');
-let lastClickTime = 0;
-
 function updateCountdown() {
   const now = new Date();
   const diffTime = endDate - now;
   
   if (diffTime <= 0) {
     document.getElementById('countdown').textContent = "Время пришло!";
-    showMessage("Добро пожаловать домой!");
     return;
   }
   
@@ -76,46 +71,14 @@ function updateCountdown() {
     `${days}д ${hours}ч ${minutes}м ${seconds}с`;
 }
 
-function showMessage(message) {
-  surpriseElement.textContent = message;
+function showSurprise() {
+  const randomIndex = Math.floor(Math.random() * surprises.length);
+  const surpriseElement = document.getElementById('surprise');
+  surpriseElement.textContent = surprises[randomIndex];
   surpriseElement.classList.add('show');
 }
 
-function showHourlySurprise() {
-  const now = new Date();
-  const hourIndex = now.getHours() % surprises.length;
-  showMessage(surprises[hourIndex]);
-  
-  // Проверяем, можно ли показать кнопку
-  checkButtonVisibility();
-}
-
-function showRandomSurprise() {
-  const randomIndex = Math.floor(Math.random() * surprises.length);
-  showMessage(surprises[randomIndex]);
-  surpriseBtn.classList.add('hidden');
-  lastClickTime = Date.now();
-  
-  // Кнопка появится снова через час
-  setTimeout(() => {
-    surpriseBtn.classList.remove('hidden');
-  }, 60 * 60 * 1000);
-}
-
-function checkButtonVisibility() {
-  const now = Date.now();
-  if (now - lastClickTime > 60 * 60 * 1000) {
-    surpriseBtn.classList.remove('hidden');
-  }
-}
-
 // Инициализация
-surpriseBtn.addEventListener('click', showRandomSurprise);
+document.getElementById('surpriseBtn').addEventListener('click', showSurprise);
 updateCountdown();
 setInterval(updateCountdown, 1000);
-
-// Показываем первый сюрприз при загрузке
-setTimeout(() => {
-  showHourlySurprise();
-  setInterval(showHourlySurprise, 60 * 60 * 1000);
-}, 1000);
